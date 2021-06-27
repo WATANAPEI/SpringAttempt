@@ -1,5 +1,6 @@
-package dev.wpei.springattempt;
+package dev.wpei.springattempt.controller;
 
+import dev.wpei.springattempt.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import java.util.concurrent.atomic.AtomicLong;
 

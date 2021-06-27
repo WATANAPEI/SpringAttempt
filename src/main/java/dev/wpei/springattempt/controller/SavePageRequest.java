@@ -1,9 +1,9 @@
-package dev.wpei.springattempt;
+package dev.wpei.springattempt.controller;
+
 import lombok.Data;
 
 @Data
-public class Page {
+public class SavePageRequest {
     private String url;
     private String content;
-
 }
