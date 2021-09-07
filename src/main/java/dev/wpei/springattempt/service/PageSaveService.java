@@ -7,10 +7,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PageSaveService {
+    private final ObjectUploader uploader;
     @Autowired
-    ObjectUploader uploader;
+    public PageSaveService(ObjectUploader uploader) {
+        this.uploader = uploader;
+    }
 
-    public PageSaveService(){}
     public void save(Page page) {
         uploader.upload(page);
         System.out.println("Upload finished.");

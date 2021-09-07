@@ -6,4 +6,5 @@ import lombok.Data;
 public class SavePageRequest {
     private String url;
     private String content;
+    private String id;
 }
