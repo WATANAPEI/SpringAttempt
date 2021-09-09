@@ -1,26 +1,40 @@
 package dev.wpei.springattempt.service;
 
+import dev.wpei.springattempt.controller.PageResource;
 import dev.wpei.springattempt.domain.Page;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.URI;
 
+@Service
 public class PageFetchService {
     private final RestTemplate restTemplate;
-    private final String gatewayPath = "https://l1ncqf4mxg.execute-api.ap-northeast-1.amazonaws.com/dev/stateofemergency";
 
+    @Autowired
     public PageFetchService(RestTemplateBuilder restTemplateBuilder) {
         this.restTemplate = restTemplateBuilder.build();
     }
 
     public Page getPage(String prefecture) {
-        String uri = UriComponentsBuilder.fromPath(gatewayPath)
-                .query("prefecture={prefecture")
+        String uri = UriComponentsBuilder.newInstance()
+                .scheme("https")
+                .host("l1ncqf4mxg.execute-api.ap-northeast-1.amazonaws.com")
+                .path("/dev/stateofemergency")
+                .query("prefecture={prefecture}")
                 .buildAndExpand(prefecture)
-                .encode()
+                //.encode()
                 .toUriString();
-        return this.restTemplate.getForEntity(uri, Page.class).getBody();
+        System.out.println("URL: " + uri);
+        PageResource response = this.restTemplate.getForEntity(uri, PageResource.class).getBody();
+        System.out.println("response: " + response);
+        Page page = new Page();
+        page.setPrefecture(response.getItem().getPrefecture().getS());
+        page.setFrom(response.getItem().getFrom().getS());
+        page.setTo(response.getItem().getTo().getS());
+        return page;
     }
 }
