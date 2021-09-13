@@ -2,8 +2,7 @@ package dev.wpei.springattempt.service;
 
 import dev.wpei.springattempt.aws.s3.ObjectUploader;
 import dev.wpei.springattempt.domain.Page;
-import dev.wpei.springattempt.repo.PageRepository;
-import lombok.Builder;
+import dev.wpei.springattempt.repository.PageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
