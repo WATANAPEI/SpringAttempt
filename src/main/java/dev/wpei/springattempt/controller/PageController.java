@@ -25,20 +25,32 @@ public class PageController {
     }
 
     @GetMapping("/pages")
-    public Page pages() {
+    public Page getPages() {
         Page page = new Page();
         page.setPrefecture("http://example.com/test");
         page.setFrom("this page is test.");
         return page;
     }
 
+    /**
+     *
+     * curl -vG "http://localhost:8080/api/v1/page" --data-urlencode "prefecture=千葉県"
+     *
+     * @param prefecture
+     * @return
+     */
     @GetMapping("/page")
-    public Page page(@RequestParam @NonNull String prefecture) {
+    public Page getPage(@RequestParam @NonNull String prefecture) {
         Page page = pageFetchService.getPage(prefecture);
         System.out.println(page);
         return page;
     }
 
+    /**
+     * curl -v -X POST -H "Content-Type: application/json" --data '{"url":"http","content":"aafds", "id":"3324"}' "http://lcaolhost:8080/api/v1/page"
+     * @param request
+     * @return
+     */
     @PostMapping("/page")
     public String savePage(@RequestBody SavePageRequest request) {
         Page page = new Page();

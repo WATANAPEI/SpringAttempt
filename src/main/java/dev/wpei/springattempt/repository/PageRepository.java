@@ -13,7 +13,7 @@ public class PageRepository {
     public PageRepository() {
     }
     public void save(Page page) {
-        final Path filePath = Paths.get("target", "temp.txt");
+        final Path filePath = Paths.get("temp.txt");
         try {
             Path file = Files.createFile(filePath);
             String txt = page + " saved to " + file;
