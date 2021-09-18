@@ -15,6 +15,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.net.URLEncoder;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -33,9 +35,16 @@ public class PageControllerTest {
     private PageSaveService pageSaveServiceMock;
 
     @Test
-    public void getPageReturn200 () throws Exception {
+    public void getPagesReturn200 () throws Exception {
         //Mockito.doReturn(new Page()).when(pageFetchServiceMock).getPage("千葉県");
         mockMvc.perform(get("/api/v1/pages"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void getPageReturn200 () throws Exception {
+        String paramValue = "千葉県";
+        mockMvc.perform(get("/api/v1/page").queryParam("prefecture", URLEncoder.encode(paramValue, "UTF-8")))
                 .andExpect(status().isOk());
     }
 

@@ -1,20 +1,19 @@
-package dev.wpei.springattempt.service;
+package dev.wpei.springattempt.repository;
 
-import dev.wpei.springattempt.dto.state_of_emergency.StateOfEmergencyResponseDto;
 import dev.wpei.springattempt.domain.Page;
+import dev.wpei.springattempt.dto.state_of_emergency.StateOfEmergencyResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-
-@Service
-public class PageFetchService {
+@Repository
+class StateOfEmergencyRepositoryImpl implements StateOfEmergencyRepository {
     private final RestTemplate restTemplate;
 
     @Autowired
-    public PageFetchService(RestTemplateBuilder restTemplateBuilder) {
+    public StateOfEmergencyRepositoryImpl(RestTemplateBuilder restTemplateBuilder) {
         this.restTemplate = restTemplateBuilder.build();
     }
 
@@ -31,7 +30,8 @@ public class PageFetchService {
         return uri;
     }
 
-    public Page getPage(String prefecture) {
+    @Override
+    public Page get(String prefecture) {
         StateOfEmergencyResponseDto response = this.restTemplate.getForEntity(buildUriOfGetPage(prefecture), StateOfEmergencyResponseDto.class).getBody();
         System.out.println("response: " + response);
         Page page = Page.builder()
