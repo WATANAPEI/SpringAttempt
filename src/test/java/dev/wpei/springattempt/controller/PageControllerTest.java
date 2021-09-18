@@ -35,10 +35,8 @@ public class PageControllerTest {
     @Test
     public void getPageReturn200 () throws Exception {
         //Mockito.doReturn(new Page()).when(pageFetchServiceMock).getPage("千葉県");
-        mockMvc.perform(get("/v1/pages"))
+        mockMvc.perform(get("/api/v1/pages"))
                 .andExpect(status().isOk());
-
-
     }
 
 }

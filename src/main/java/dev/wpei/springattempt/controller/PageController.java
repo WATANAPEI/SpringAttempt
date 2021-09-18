@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
-@RequestMapping("/v1")
+@RequestMapping("/api/v1")
 public class PageController {
     private final PageSaveService pageSaveService;
     private final PageFetchService pageFetchService;
