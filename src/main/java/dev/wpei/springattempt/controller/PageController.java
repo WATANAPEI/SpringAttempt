@@ -1,6 +1,7 @@
 package dev.wpei.springattempt.controller;
 
 import dev.wpei.springattempt.domain.Page;
+import dev.wpei.springattempt.dto.SavePageRequestDto;
 import dev.wpei.springattempt.service.PageFetchService;
 import dev.wpei.springattempt.service.PageSaveService;
 import lombok.NonNull;
@@ -52,7 +53,7 @@ public class PageController {
      * @return
      */
     @PostMapping("/page")
-    public String savePage(@RequestBody SavePageRequest request) {
+    public String savePage(@RequestBody SavePageRequestDto request) {
         Page page = new Page();
         page.setPrefecture(request.getUrl());
         page.setFrom((request.getContent()));

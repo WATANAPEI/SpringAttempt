@@ -1,9 +1,9 @@
-package dev.wpei.springattempt.controller;
+package dev.wpei.springattempt.dto;
 
 import lombok.Data;
 
 @Data
-public class SavePageRequest {
+public class SavePageRequestDto {
     private String url;
     private String content;
     private String id;

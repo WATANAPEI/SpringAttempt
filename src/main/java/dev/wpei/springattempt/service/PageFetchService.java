@@ -1,10 +1,9 @@
 package dev.wpei.springattempt.service;
 
-import dev.wpei.springattempt.controller.PageResource;
+import dev.wpei.springattempt.dto.PageResponseDto;
 import dev.wpei.springattempt.domain.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -29,7 +28,7 @@ public class PageFetchService {
                 //.encode()
                 .toUriString();
         System.out.println("URL: " + uri);
-        PageResource response = this.restTemplate.getForEntity(uri, PageResource.class).getBody();
+        PageResponseDto response = this.restTemplate.getForEntity(uri, PageResponseDto.class).getBody();
         System.out.println("response: " + response);
         Page page = new Page();
         page.setPrefecture(response.getItem().getPrefecture().getS());
