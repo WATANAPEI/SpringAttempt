@@ -2,13 +2,12 @@ package dev.wpei.springattempt.domain;
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
 @Builder
-public class Page {
+public class LocalStateOfEmergency {
+    private int id;
     private String prefecture;
     private String from;
     private String to;
-    private LocalDateTime createdAt;
+    private String prefecture_name;
 }

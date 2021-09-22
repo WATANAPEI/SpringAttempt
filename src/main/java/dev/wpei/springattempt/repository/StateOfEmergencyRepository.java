@@ -1,10 +1,10 @@
 package dev.wpei.springattempt.repository;
 
-import dev.wpei.springattempt.domain.Page;
+import dev.wpei.springattempt.domain.LocalStateOfEmergency;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface StateOfEmergencyRepository {
-    public Page get(String prefecture);
+    public LocalStateOfEmergency get(String prefecture);
     public String getAccessUrl(String prefecture);
 }

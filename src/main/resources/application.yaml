@@ -10,3 +10,14 @@ repository:
       port: 443
       path: /dev/stateofemergency
       query: prefecture={prefecture}
+
+spring:
+  datasource:
+    url: ${db.url}
+    user: ${db.user}
+    password: ${db.password}
+
+flyway:
+  url: ${db.url}
+  user: ${db.user}
+  password: ${db.password}

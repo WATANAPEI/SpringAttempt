@@ -1,7 +1,7 @@
 package dev.wpei.springattempt.repository;
 
 import dev.wpei.springattempt.config.RepositoryConfig;
-import dev.wpei.springattempt.domain.Page;
+import dev.wpei.springattempt.domain.LocalStateOfEmergency;
 import dev.wpei.springattempt.dto.state_of_emergency.StateOfEmergencyResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -41,15 +41,15 @@ class StateOfEmergencyRepositoryImpl implements StateOfEmergencyRepository {
     }
 
     @Override
-    public Page get(String prefecture) {
+    public LocalStateOfEmergency get(String prefecture) {
         System.out.println("prefecture in get: " + prefecture);
         StateOfEmergencyResponseDto response = this.restTemplate.getForEntity(buildUriOfGetPage(prefecture), StateOfEmergencyResponseDto.class).getBody();
         System.out.println("response: " + response);
-        Page page = Page.builder()
+        LocalStateOfEmergency localStateOfEmergency = LocalStateOfEmergency.builder()
                 .prefecture(response.getItem().getPrefecture().getS())
                 .from(response.getItem().getFrom().getS())
                 .to(response.getItem().getTo().getS())
                 .build();
-        return page;
+        return localStateOfEmergency;
     }
 }
