@@ -30,15 +30,8 @@ public class LocalStateOfEmergencyControllerTest {
     private StateOfEmergencyRepository repository;
 
     @Test
-    public void getPagesReturn200 () throws Exception {
-        //Mockito.doReturn(new Page()).when(pageFetchServiceMock).getPage("千葉県");
-        mockMvc.perform(get("/api/v1/pages"))
-                .andExpect(status().isOk());
-    }
-
-    @Test
     public void getPageReturn200 () throws Exception {
-        String paramValue = "千葉県";
+        String paramValue = "chiba";
         mockMvc.perform(get("/api/v1/page").queryParam("prefecture", URLEncoder.encode(paramValue, StandardCharsets.UTF_8)))
                 .andExpect(status().isOk());
     }

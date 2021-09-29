@@ -20,14 +20,6 @@ public class PageController {
         this.stateOfEmergencyRepository = stateOfEmergencyRepository;
     }
 
-    @GetMapping("/pages")
-    public LocalStateOfEmergency getPages() {
-        return LocalStateOfEmergency.builder()
-                .prefecture("http://example.com/test")
-                .from("this page is test.")
-                .build();
-    }
-
     /**
      *
      * curl -vG "http://localhost:8080/api/v1/page" --data-urlencode "prefecture=千葉県"
@@ -38,19 +30,6 @@ public class PageController {
         LocalStateOfEmergency localStateOfEmergency = stateOfEmergencyRepository.get(prefecture);
         System.out.println(localStateOfEmergency);
         return localStateOfEmergency;
-    }
-
-    /**
-     * curl -v -X POST -H "Content-Type: application/json" --data '{"url":"http","content":"test", "id":"3324"}' "http://lcaolhost:8080/api/v1/page"
-     */
-    @PostMapping("/page")
-    public String savePage(@RequestBody SavePageRequestDto request) {
-        LocalStateOfEmergency localStateOfEmergency = LocalStateOfEmergency.builder()
-                .prefecture(request.getUrl())
-                .from(request.getContent())
-                .build();
-        pageSaveService.save(localStateOfEmergency);
-        return "saved: " + request.getUrl();
     }
 
 }

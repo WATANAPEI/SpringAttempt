@@ -8,5 +8,5 @@ repository:
       scheme: http
       host: localhost
       port: 8080
-      path: /dev/stateofemergency
+      path: /dev/state_of_emergency
       query: prefecture={prefecture}

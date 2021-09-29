@@ -14,7 +14,7 @@ public class ObjectUploader {
         System.out.format("Uploading %s to S3 bucket %s...\n", localStateOfEmergency.getPrefecture(), BUCKET_NAME);
         final AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(REGION).build();
         try {
-            s3.putObject(BUCKET_NAME, localStateOfEmergency.getPrefecture_name().toString(), localStateOfEmergency.getFrom());
+            //s3.putObject(BUCKET_NAME, localStateOfEmergency.getPrefecture().toString(), localStateOfEmergency.getEffectiveTo().toString());
         } catch(AmazonServiceException e) {
             System.out.println(e);
             throw e;

@@ -47,8 +47,9 @@ class StateOfEmergencyRepositoryImpl implements StateOfEmergencyRepository {
         System.out.println("response: " + response);
         LocalStateOfEmergency localStateOfEmergency = LocalStateOfEmergency.builder()
                 .prefecture(response.getItem().getPrefecture().getS())
-                .from(response.getItem().getFrom().getS())
-                .to(response.getItem().getTo().getS())
+                .effectiveFrom(response.getItem().getFrom().getS())
+                .effectiveTo(response.getItem().getTo().getS())
+                .prefectureName(response.getItem().getPrefectureName().getS())
                 .build();
         return localStateOfEmergency;
     }

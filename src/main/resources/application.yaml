@@ -6,18 +6,18 @@ repository:
   external:
     state-of-emergency:
       scheme: https
-      host: l1ncqf4mxg.execute-api.ap-northeast-1.amazonaws.com
+      host: g8shw1q2ri.execute-api.us-east-2.amazonaws.com
       port: 443
-      path: /dev/stateofemergency
+      path: /dev/state_of_emergency
       query: prefecture={prefecture}
 
 spring:
   datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: ${db.url}
     user: ${db.user}
     password: ${db.password}
 
-flyway:
-  url: ${db.url}
-  user: ${db.user}
-  password: ${db.password}
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true

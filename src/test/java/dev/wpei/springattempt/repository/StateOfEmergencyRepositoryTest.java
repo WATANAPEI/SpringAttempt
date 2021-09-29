@@ -30,17 +30,17 @@ public class StateOfEmergencyRepositoryTest {
 
     @Test
     public void getPageReturnsPageOfGivenPrefecture() {
-        String prefecture = URLEncoder.encode("千葉県", StandardCharsets.UTF_8);
-        String rawPrefecture = "千葉県";
-        String responseJson = "{\"Item\":{\"prefecture\":{\"S\":\"千葉県\"},\"to\":{\"S\":\"20210912\"},\"from\":{\"S\":\"20210802\"}}}";
+        String prefecture = URLEncoder.encode("chiba", StandardCharsets.UTF_8);
+        String rawPrefecture = "chiba";
+        String responseJson = "{\"Item\":{\"prefecture\":{\"S\":\"chiba\"},\"to\":{\"S\":\"20210912\"},\"from\":{\"S\":\"20210802\"},\"prefecture_name\":\"千葉県\"}}";
         this.server.expect(requestTo(stateOfEmergencyRepository.getAccessUrl(prefecture)))
                 .andRespond(withSuccess(responseJson, MediaType.APPLICATION_JSON));
 
         LocalStateOfEmergency expected = LocalStateOfEmergency.builder()
-                .prefecture("千葉県")
-                .from("20210802")
-                .to("20210912")
-                .prefecture_name(null)
+                .prefecture("chiba")
+                .effectiveFrom("20210802")
+                .effectiveTo("20210912")
+                .prefectureName("千葉県")
                 .build();
 
         LocalStateOfEmergency actual = stateOfEmergencyRepository.get(rawPrefecture);

@@ -1,13 +1,13 @@
-package dev.wpei.springattempt.domain;
-import lombok.Builder;
+package dev.wpei.springattempt.entity;
+
 import lombok.Data;
 
 @Data
-@Builder
-public class LocalStateOfEmergency {
+public class StateOfEmergency {
     private int id;
     private String prefecture;
     private String effectiveFrom;
     private String effectiveTo;
     private String prefectureName;
+
 }
