@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class StateOfEmergencyNDto {
     @JsonProperty("N")
-    private String n;
+    private int n;
 }

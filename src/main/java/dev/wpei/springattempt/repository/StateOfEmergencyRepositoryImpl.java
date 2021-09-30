@@ -45,12 +45,13 @@ class StateOfEmergencyRepositoryImpl implements StateOfEmergencyRepository {
         System.out.println("prefecture in get: " + prefecture);
         StateOfEmergencyResponseDto response = this.restTemplate.getForEntity(buildUriOfGetPage(prefecture), StateOfEmergencyResponseDto.class).getBody();
         System.out.println("response: " + response);
-        LocalStateOfEmergency localStateOfEmergency = LocalStateOfEmergency.builder()
-                .prefecture(response.getItem().getPrefecture().getS())
-                .effectiveFrom(response.getItem().getFrom().getS())
-                .effectiveTo(response.getItem().getTo().getS())
-                .prefectureName(response.getItem().getPrefectureName().getS())
-                .build();
+
+        LocalStateOfEmergency localStateOfEmergency = new LocalStateOfEmergency();
+        localStateOfEmergency.setId(response.getItems().get(0).getId().getN());
+        localStateOfEmergency.setPrefecture(response.getItems().get(0).getPrefecture().getS());
+        localStateOfEmergency.setEffectiveFrom(response.getItems().get(0).getFrom().getS());
+        localStateOfEmergency.setEffectiveTo(response.getItems().get(0).getTo().getS());
+        localStateOfEmergency.setPrefectureName(response.getItems().get(0).getPrefectureName().getS());
         return localStateOfEmergency;
     }
 }

@@ -32,19 +32,24 @@ public class StateOfEmergencyRepositoryTest {
     public void getPageReturnsPageOfGivenPrefecture() {
         String prefecture = URLEncoder.encode("chiba", StandardCharsets.UTF_8);
         String rawPrefecture = "chiba";
-        String responseJson = "{\"Item\":{\"prefecture\":{\"S\":\"chiba\"},\"to\":{\"S\":\"20210912\"},\"from\":{\"S\":\"20210802\"},\"prefecture_name\":\"千葉県\"}}";
+        String responseJson = "{\"Count\": 1,\"Items\": [{\"prefecture\": {\"S\": \"chiba\" },\"id\": {\"N\": \"0\" },\"to\": {\"S\": \"20210930\" },\"prefecture_name\": {\"S\": \"千葉県\" },\"from\": {\"S\": \"20210802\" } }],\"ScannedCount\": 6 }";
+
         this.server.expect(requestTo(stateOfEmergencyRepository.getAccessUrl(prefecture)))
                 .andRespond(withSuccess(responseJson, MediaType.APPLICATION_JSON));
 
-        LocalStateOfEmergency expected = LocalStateOfEmergency.builder()
-                .prefecture("chiba")
-                .effectiveFrom("20210802")
-                .effectiveTo("20210912")
-                .prefectureName("千葉県")
-                .build();
+        LocalStateOfEmergency expected = new LocalStateOfEmergency();
+        expected.setId(0);
+        expected.setPrefecture("chiba");
+        expected.setEffectiveFrom("20210802");
+        expected.setEffectiveTo("20210930");
+        expected.setPrefectureName("千葉県");
 
         LocalStateOfEmergency actual = stateOfEmergencyRepository.get(rawPrefecture);
-        MatcherAssert.assertThat(actual, equalTo(expected));
-
+        System.out.println("actual: " + actual);
+        MatcherAssert.assertThat(actual.getId(), equalTo(expected.getId()));
+        MatcherAssert.assertThat(actual.getPrefecture(), equalTo(expected.getPrefecture()));
+        MatcherAssert.assertThat(actual.getEffectiveFrom(), equalTo(expected.getEffectiveFrom()));
+        MatcherAssert.assertThat(actual.getEffectiveTo(), equalTo(expected.getEffectiveTo()));
+        MatcherAssert.assertThat(actual.getPrefectureName(), equalTo(expected.getPrefectureName()));
     }
 }

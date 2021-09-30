@@ -1,9 +1,11 @@
 package dev.wpei.springattempt.domain;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
-@Data
-@Builder
+@Getter
+@Setter
+@EqualsAndHashCode
+@NoArgsConstructor
+//@Builder
 public class LocalStateOfEmergency {
     private int id;
     private String prefecture;
