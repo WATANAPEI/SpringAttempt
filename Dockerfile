@@ -1,10 +1,15 @@
 # build application
 FROM maven:3.6.1-amazoncorretto-11 as build
 RUN mkdir -p /opt/springattempt/src
+# pom.xml だけデプロイし、先に依存解決
 COPY pom.xml /opt/springattempt
-COPY src /opt/springattempt/src
 EXPOSE 443
-RUN cd /opt/springattempt && mvn install
+WORKDIR /opt/springattempt
+# RUN mvn -B package; echo ""
+RUN mvn -B dependency:resolve dependency:resolve-plugins
+
+COPY src /opt/springattempt/src
+RUN mvn -B package
 
 # build docker image
 FROM openjdk:11

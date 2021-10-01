@@ -11,9 +11,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StateOfEmergencyResponseDto {
+    @JsonProperty("Count")
     private int count;
     @JsonProperty("Items")
     private List<StateOfEmergencyItemDto> items;
+    @JsonProperty("ScannedCount")
     private int scannedCount;
 
 }
