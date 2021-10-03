@@ -45,7 +45,6 @@ public class StateOfEmergencyRepositoryTest {
         expected.setPrefectureName("千葉県");
 
         LocalStateOfEmergency actual = stateOfEmergencyRepository.get(rawPrefecture);
-        System.out.println("actual: " + actual);
         MatcherAssert.assertThat(actual.getId(), equalTo(expected.getId()));
         MatcherAssert.assertThat(actual.getPrefecture(), equalTo(expected.getPrefecture()));
         MatcherAssert.assertThat(actual.getEffectiveFrom(), equalTo(expected.getEffectiveFrom()));

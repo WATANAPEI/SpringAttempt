@@ -3,10 +3,12 @@ package dev.wpei.springattempt.service;
 import dev.wpei.springattempt.aws.s3.ObjectUploader;
 import dev.wpei.springattempt.domain.LocalStateOfEmergency;
 import dev.wpei.springattempt.repository.LocalStateOfEmergencyRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class PageSaveService {
     private ObjectUploader uploader;
     private LocalStateOfEmergencyRepository repo;
@@ -29,11 +31,11 @@ public class PageSaveService {
         }
         if(uploader != null) {
             uploader.upload(localStateOfEmergency);
-            System.out.println("S3 upload finished.");
+            log.info("S3 upload finished.");
         }
         if(repo != null) {
             repo.save(localStateOfEmergency);
-            System.out.println("File save finished.");
+            log.info("File save finished.");
         }
 
     }

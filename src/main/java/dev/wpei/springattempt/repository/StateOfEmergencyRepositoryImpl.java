@@ -3,6 +3,7 @@ package dev.wpei.springattempt.repository;
 import dev.wpei.springattempt.config.RepositoryConfig;
 import dev.wpei.springattempt.domain.LocalStateOfEmergency;
 import dev.wpei.springattempt.dto.state_of_emergency.StateOfEmergencyResponseDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -12,6 +13,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @Repository
 @EnableConfigurationProperties(RepositoryConfig.class)
+@Slf4j
 class StateOfEmergencyRepositoryImpl implements StateOfEmergencyRepository {
     private final RestTemplate restTemplate;
     private final UriComponentsBuilder uriComponentsBuilder;
@@ -32,7 +34,7 @@ class StateOfEmergencyRepositoryImpl implements StateOfEmergencyRepository {
         String uri = uriComponentsBuilder
                 .buildAndExpand(prefecture)
                 .toUriString();
-        System.out.println("URL: " + uri);
+        log.debug("URL: " + uri);
         return uri;
     }
 
@@ -42,9 +44,9 @@ class StateOfEmergencyRepositoryImpl implements StateOfEmergencyRepository {
 
     @Override
     public LocalStateOfEmergency get(String prefecture) {
-        System.out.println("prefecture in get: " + prefecture);
+        log.info("prefecture in get: " + prefecture);
         StateOfEmergencyResponseDto response = this.restTemplate.getForEntity(buildUriOfGetPage(prefecture), StateOfEmergencyResponseDto.class).getBody();
-        System.out.println("response: " + response);
+        log.info("response: " + response);
 
         LocalStateOfEmergency localStateOfEmergency = new LocalStateOfEmergency();
         localStateOfEmergency.setId(response.getItems().get(0).getId().getN());

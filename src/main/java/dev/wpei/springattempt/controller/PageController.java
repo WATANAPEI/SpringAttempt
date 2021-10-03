@@ -28,7 +28,6 @@ public class PageController {
     @GetMapping("/page")
     public LocalStateOfEmergency getPage(@RequestParam @NonNull String prefecture) {
         LocalStateOfEmergency localStateOfEmergency = stateOfEmergencyRepository.get(prefecture);
-        System.out.println(localStateOfEmergency);
         return localStateOfEmergency;
     }
 
