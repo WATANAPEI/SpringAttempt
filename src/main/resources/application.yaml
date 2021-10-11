@@ -13,10 +13,10 @@ repository:
 
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${db.url}
-    user: ${db.user}
-    password: ${db.password}
+    url: jdbc:mysql://localhost:3306/state_of_emergency_db?characterEncoding=UTF-8
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driverClassName: com.mysql.cj.jdbc.Driver
 
 mybatis:
   configuration:
